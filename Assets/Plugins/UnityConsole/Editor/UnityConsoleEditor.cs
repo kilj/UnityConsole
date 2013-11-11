@@ -4,17 +4,18 @@ using System.Collections.Generic;
 
 public class UnityConsoleEditor : EditorWindow {
 	
-	private UnityConsoleEditor _instance = new UnityConsoleEditor();
+	private static UnityConsoleEditor _instance = (UnityConsoleEditor)ScriptableObject.CreateInstance(typeof(UnityConsoleEditor));
 	private UnityConsoleEditor() {}
-	public UnityConsoleEditor Instance 
+	public static UnityConsoleEditor Instance 
 	{
 		get { return _instance; }
 	}
 	
+	private static List<string> _tags = new List<string>();
 	private static List<string> _msgs = new List<string>();
 	
 	[@MenuItem ("Window/UnityConsole")]
-	static void ShowWindow ()
+	static void ShowWindow ()   
 	{
 		EditorWindow.GetWindow(typeof(UnityConsoleEditor));
 	}
@@ -25,9 +26,14 @@ public class UnityConsoleEditor : EditorWindow {
 			EditorGUILayout.LabelField("tag", msg); 
 	}
 	
+	public void OnInspectorUpdate()
+	{
+   	 	Repaint();
+	}
+	
 	public void Log ( string tag, string msg )
 	{
-		Debug.Log("We are in editor");
+		_tags.Add(tag);
 		_msgs.Add(msg);
 	}
 	

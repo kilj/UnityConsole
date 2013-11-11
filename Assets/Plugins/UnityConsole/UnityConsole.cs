@@ -2,7 +2,8 @@
 using System.Collections;
 using System;
 
-public class UnityConsole {	
+public class UnityConsole {
+	
 	public enum ConsoleTag
 	{
 		MENU,
@@ -12,7 +13,7 @@ public class UnityConsole {
 	public static void Log ( ConsoleTag tag, string msg )
 	{
 		Debug.Log ( msg );
-		UnityConsoleEditor.Log( tag.ToString(), msg );
+		UnityConsoleEditor.Instance.Log( tag.ToString(), msg );
 	}
 	
 	public static void LogWarning ( ConsoleTag tag, string msg )
