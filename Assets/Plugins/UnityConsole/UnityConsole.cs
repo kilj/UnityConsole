@@ -2,7 +2,7 @@
 using System.Collections;
 using System;
 
-public class UnityConsole : MonoBehaviour {	
+public class UnityConsole {	
 	public enum ConsoleTag
 	{
 		MENU,
@@ -12,7 +12,7 @@ public class UnityConsole : MonoBehaviour {
 	public static void Log ( ConsoleTag tag, string msg )
 	{
 		Debug.Log ( msg );
-		UnityConsoleEditor.Log(msg);
+		UnityConsoleEditor.Log( tag.ToString(), msg );
 	}
 	
 	public static void LogWarning ( ConsoleTag tag, string msg )

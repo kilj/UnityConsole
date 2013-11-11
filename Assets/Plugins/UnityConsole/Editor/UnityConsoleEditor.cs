@@ -1,11 +1,17 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class UnityConsoleEditor : EditorWindow {
 	
-	private static string _testStr = "";
+	private UnityConsoleEditor _instance = new UnityConsoleEditor();
+	private UnityConsoleEditor() {}
+	public UnityConsoleEditor Instance 
+	{
+		get { return _instance; }
+	}
 	
-	private bool _isSubscribed;
+	private static List<string> _msgs = new List<string>();
 	
 	[@MenuItem ("Window/UnityConsole")]
 	static void ShowWindow ()
@@ -15,13 +21,14 @@ public class UnityConsoleEditor : EditorWindow {
 		
 	void OnGUI ()
 	{
-		EditorGUILayout.TextField("Test", _testStr); 
+		foreach(string msg in _msgs)
+			EditorGUILayout.LabelField("tag", msg); 
 	}
 	
-	public static void Log ( string msg )
+	public void Log ( string tag, string msg )
 	{
 		Debug.Log("We are in editor");
-		_testStr = msg;
+		_msgs.Add(msg);
 	}
 	
 }
