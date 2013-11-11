@@ -15,15 +15,29 @@ public class UnityConsoleEditor : EditorWindow {
 	private static List<string> _msgs = new List<string>();
 	
 	[@MenuItem ("Window/UnityConsole")]
-	static void ShowWindow ()   
+	static void Init ()   
 	{
 		EditorWindow.GetWindow(typeof(UnityConsoleEditor));
 	}
 		
 	void OnGUI ()
 	{
+		EditorGUILayout.BeginVertical();
+		
+		if(GUILayout.Button("Clear"))
+		{
+			_tags.Clear();
+			_msgs.Clear();
+		}
+		
+		EditorGUILayout.BeginScrollView(new Vector2(0,0), GUILayout.ExpandWidth(true),GUILayout.ExpandHeight(true));
+		
 		foreach(string msg in _msgs)
 			EditorGUILayout.LabelField("tag", msg); 
+		
+		EditorGUILayout.EndScrollView();
+		
+		EditorGUILayout.EndVertical();
 	}
 	
 	public void OnInspectorUpdate()
@@ -33,6 +47,7 @@ public class UnityConsoleEditor : EditorWindow {
 	
 	public void Log ( string tag, string msg )
 	{
+		Debug.Log("sdf");
 		_tags.Add(tag);
 		_msgs.Add(msg);
 	}

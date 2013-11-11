@@ -12,6 +12,10 @@ public class UnityConsoleExample : MonoBehaviour {
 	IEnumerator Wait()
 	{
 		yield return new WaitForSeconds(5);
-		UnityConsole.Log(UnityConsole.ConsoleTag.GAME, "test2");
+		for (int i = 0; i < 30; i++) 
+		{
+			UnityConsole.Log(UnityConsole.ConsoleTag.GAME, "test2");
+			yield return new WaitForSeconds(0.2f);
+		}
 	}
 }
