@@ -10,10 +10,8 @@ public class UnityConsoleEditor : EditorWindow {
 	{
 		get { return _instance; }
 	}
-	
-	private static List<string> _tags = new List<string>();
-	private static List<string> _msgs = new List<string>();
-    private static List<string> _timestamps = new List<string>();
+
+    private static List<string> _logMsg = new List<string>();
 
     //private static Color _timeColor = Color.black;
     //private static Color _tagColor = Color.white;
@@ -35,17 +33,15 @@ public class UnityConsoleEditor : EditorWindow {
 		
 		if(GUILayout.Button("Clear"))
 		{
-			_tags.Clear();
-			_msgs.Clear();
-            _timestamps.Clear();
+            _logMsg.Clear();
 		}
 		
 		EditorGUILayout.BeginScrollView(new Vector2(0,0), GUILayout.ExpandWidth(true),GUILayout.ExpandHeight(true));
 		
-		for ( int i = 0; i < _tags.Count; i++ )
+		for ( int i = 0; i < _logMsg.Count; i++ )
         {
             EditorGUILayout.BeginHorizontal();
-            EditorGUILayout.SelectableLabel( _timestamps[i] + " | " + _tags[i] + " : " + _msgs[i], GUILayout.Height(16));
+            EditorGUILayout.SelectableLabel( _logMsg[i], GUILayout.Height(16));
             EditorGUILayout.EndHorizontal();
         }
 			
@@ -62,9 +58,7 @@ public class UnityConsoleEditor : EditorWindow {
 	
 	public void Log ( string tag, string msg )
 	{
-		_tags.Add(tag);
-		_msgs.Add(msg);
-        _timestamps.Add(System.DateTime.Now.ToString("HH:mm:ss"));
+        _logMsg.Add(System.DateTime.Now.ToString("HH:mm:ss") + " | " + tag + " : " + msg);
 	}
 	
 }
